@@ -1,0 +1,45 @@
+<header class="user-toolbar">
+  <div class="toolbar-left">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="toolbar-right">
+    <!-- กลุ่มหลักรวมเป็น rectangle ยาว -->
+    <div class="toolbar-main">
+      <a routerLink="/store-main" class="toolbar-item">
+        <span class="icon">🏠</span>
+        <span>หน้าหลัก</span>
+      </a>
+
+      <a routerLink="/library" class="toolbar-item">
+        <span class="icon">🎮</span>
+        <span>คลังเกม</span>
+      </a>
+      <a routerLink="/wallet" class="toolbar-item">
+        <span class="icon">💰</span>
+        <span>เงิน: {{ balance | number : "1.0-2" }} ฿</span>
+      </a>
+    </div>
+
+    <!-- กลุ่มตะกร้า + ผู้ใช้ -->
+    <!-- กลุ่มตะกร้า + ผู้ใช้ -->
+    <div class="toolbar-side">
+      <a routerLink="/purchase" class="toolbar-item">
+        <span class="icon">🛒</span>
+      </a>
+
+      <!-- Dropdown user -->
+      <div class="user-dropdown" (click)="toggleDropdown()" tabindex="0">
+        <img
+          [src]="currentUser?.profile_image || 'assets/default-avatar.png'"
+          alt="User"
+          class="user-avatar"
+        />
+        <div class="dropdown-menu" [class.show]="dropdownOpen">
+          <a routerLink="/profile" class="dropdown-item">โปรไฟล์</a>
+          <button (click)="logout()" class="dropdown-item">ออกจากระบบ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

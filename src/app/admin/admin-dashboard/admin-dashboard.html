@@ -1,0 +1,181 @@
+<app-admin-navbar></app-admin-navbar>
+
+<!-- ส่วน content ของหน้าแอดมิน -->
+<router-outlet></router-outlet>
+<div class="container">
+  <!-- ปุ่ม Add / Edit -->
+  <div class="table-header">
+    <h2>รายการเกมทั้งหมด</h2>
+    <div class="action-buttons">
+      <button class="btn btn-add" (click)="openModal('add')">เพิ่ม</button>
+      <button class="btn btn-edit" (click)="openModal('edit')">แก้ไข</button>
+      <button class="btn btn-delete" (click)="openDeleteModal()">ลบเกม</button>
+    </div>
+  </div>
+
+  <!-- ตารางเกม -->
+  <div class="table-container card">
+    <h2>รายการเกม</h2>
+    <table class="games-table">
+      <thead>
+        <tr>
+          <th>ชื่อเกม</th>
+          <th>ประเภท</th>
+          <th>ราคา</th>
+          <th>วันวางจำหน่าย</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games">
+          <td>{{ game.title }}</td>
+          <td>{{ game.category_name }}</td>
+          <td>{{ game.price | currency : "USD" : "symbol" : "1.2-2" }}</td>
+          <td>{{ game.release_date | date : "dd/MM/yyyy" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Modal ลบเกม -->
+  <div class="modal" [class.show]="showDeleteModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeDeleteModal()">&times;</span>
+      <h2>ลบเกม</h2>
+
+      <div class="form-group">
+        <label>เลือกเกมที่ต้องการลบ</label>
+        <select [(ngModel)]="deleteGameId">
+          <option [ngValue]="null" disabled selected>-- เลือกเกม --</option>
+          <option *ngFor="let game of games" [ngValue]="game.id">
+            {{ game.title }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" (click)="confirmDelete()">ลบเกม</button>
+        <button class="btn btn-secondary" (click)="closeDeleteModal()">
+          ยกเลิก
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Modal ลบเกม -->
+  <div class="modal" [class.show]="showDeleteModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeDeleteModal()">&times;</span>
+      <h2>ลบเกม</h2>
+
+      <div class="form-group">
+        <label>เลือกเกมที่ต้องการลบ</label>
+        <select [(ngModel)]="deleteGameId">
+          <option [ngValue]="null" disabled selected>-- เลือกเกม --</option>
+          <option *ngFor="let game of games" [ngValue]="game.id">
+            {{ game.title }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" (click)="confirmDelete()">ลบเกม</button>
+        <button class="btn btn-secondary" (click)="closeDeleteModal()">
+          ยกเลิก
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Modal เพิ่ม/แก้ไขเกม -->
+  <!-- Modal เพิ่ม/แก้ไขเกม -->
+  <div class="modal" [class.show]="showModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h2>{{ modalMode === "add" ? "เพิ่มเกมใหม่" : "แก้ไขเกม" }}</h2>
+
+      <!-- เลือกเกมเฉพาะโหมด edit -->
+      <div *ngIf="modalMode === 'edit'" class="form-group">
+        <label>เลือกเกมที่จะแก้ไข</label>
+        <select [(ngModel)]="editGameId" (change)="loadGameForEdit()">
+          <option [ngValue]="null" disabled selected>-- เลือกเกม --</option>
+          <option *ngFor="let game of games" [ngValue]="game.id">
+            {{ game.title }}
+          </option>
+        </select>
+      </div>
+
+      <!-- แสดงรูปภาพปัจจุบัน / ที่เลือก -->
+      <div *ngIf="file || currentImageUrl" class="form-group">
+        <label>ตัวอย่างรูปภาพ</label>
+        <img
+          [src]="file ? filePreview : currentImageUrl"
+          alt="Preview"
+          class="image-preview"
+        />
+      </div>
+
+      <!-- ฟอร์มเพิ่ม/แก้ไข -->
+      <form
+        (ngSubmit)="onSubmit($event)"
+        *ngIf="modalMode === 'add' || (modalMode === 'edit' && editGameId)"
+      >
+        <div class="form-group">
+          <label>ชื่อเกม</label>
+          <input
+            type="text"
+            [(ngModel)]="title"
+            name="title"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>คำอธิบาย</label>
+          <textarea
+            [(ngModel)]="description"
+            name="description"
+            class="form-control"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label>ประเภท</label>
+          <select
+            [(ngModel)]="categoryId"
+            name="categoryId"
+            class="form-control"
+            required
+          >
+            <option [ngValue]="null" disabled>-- เลือกประเภท --</option>
+            <option *ngFor="let cat of categories" [ngValue]="cat.id">
+              {{ cat.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ราคา</label>
+          <input
+            type="number"
+            [(ngModel)]="price"
+            name="price"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>รูปภาพ</label>
+          <input type="file" (change)="onFileSelected($event)" />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            {{ modalMode === "add" ? "เพิ่มเกม" : "บันทึกการเปลี่ยนแปลง" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+          >
+            ปิด
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

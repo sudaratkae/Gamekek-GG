@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <!-- ฝั่งซ้าย: ฟอร์ม -->
+    
+    <div class="login-left"> 
+      <h1>Welcome to Gamekek</h1>
+      <h3>Login your account</h3>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div>
+          <label>Email</label>
+          <input formControlName="email" type="email" />
+          <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="error">
+            กรุณากรอกอีเมลที่ถูกต้อง
+          </div>
+        </div>
+
+        <div>
+          <label>Password</label>
+          <input formControlName="password" type="password" />
+          <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+            กรุณากรอกรหัสผ่าน
+          </div>
+        </div>
+
+        <div *ngIf="error" class="error">{{error}}</div>
+
+        <button type="submit">เข้าสู่ระบบ</button>
+      </form>
+
+      <p>ยังไม่มีบัญชี? 
+        <button (click)="goToRegister()">สมัครสมาชิก</button>
+      </p>
+    </div>
+
+    <!-- ฝั่งขวา: รูป -->
+    <div class="login-right">
+      <img src="assets/logo.png" alt="Logo" />
+    </div>
+  </div>
+</div>

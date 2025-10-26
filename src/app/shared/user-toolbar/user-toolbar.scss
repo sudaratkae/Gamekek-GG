@@ -1,0 +1,130 @@
+/* --- Toolbar หลัก (แถบสีแดง) --- */
+.user-toolbar {
+  display: flex;
+  justify-content: space-between; // ผลักโลโก้ไปซ้ายสุด และเมนูไปขวาสุด
+  align-items: center;
+  padding: 2rem 2.5rem; // ปรับ padding ให้พอดี
+  background-color: #b22222; // สีแดงเข้ม (Firebrick)
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- โลโก้ "GameKek" --- */
+.toolbar-left h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* --- Container ของเมนูทั้งหมดทางขวา --- */
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; // ระยะห่างระหว่างกลุ่มเมนูสีเหลือง กับกลุ่มตะกร้า
+}
+
+/* --- ส่วนเมนูสีเหลือง (หน้าหลัก, คลังเกม, เงิน) --- */
+.toolbar-main {
+  display: flex;
+  align-items: center;
+  background-color: #ffd700; // สีเหลืองทอง
+  border-radius: 50px; // ทำให้เป็นทรงแคปซูล
+  padding: 0.5rem 0.75rem;
+  gap: 1rem; // ระยะห่างระหว่างไอเท็มข้างใน
+}
+
+/* --- ปุ่มเมนูแต่ละอัน --- */
+.toolbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black; // ตัวหนังสือสีดำ
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 30px; // ทำให้แต่ละปุ่มโค้งมนเล็กน้อย
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08); // เพิ่มเอฟเฟกต์เมื่อ hover
+  }
+
+  .icon {
+    font-size: 1.2rem; // ปรับขนาดไอคอน
+  }
+}
+
+/* --- กลุ่มตะกร้าและโปรไฟล์ --- */
+.toolbar-side {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --- จัดสไตล์ให้ปุ่มตะกร้าโดยเฉพาะ --- */
+.toolbar-side a[routerLink="/purchase"] {
+  background-color: rgb(251, 255, 11);
+  padding: 0.8rem;
+  border-radius: 12px; // ทำให้เป็นสี่เหลี่ยมโค้งมน
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    font-size: 1.8rem; // ไอคอนตะกร้าใหญ่ขึ้น
+  }
+
+  &:hover {
+    background-color: #f0f0f0; // สีเปลี่ยนเมื่อ hover
+  }
+}
+
+/* --- รูปโปรไฟล์ผู้ใช้ --- */
+.user-avatar {
+  width: 50px; // ปรับขนาดให้พอดี
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid white; // เพิ่มขอบขาว
+}
+
+/* --- Dropdown Menu (เหมือนเดิม) --- */
+.user-dropdown {
+  position: relative;
+
+  .dropdown-menu {
+    position: absolute;
+    top: 65px; // ปรับตำแหน่งให้ไม่ชิดเกินไป
+    right: 0;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    min-width: 160px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 0;
+    z-index: 1000;
+
+    // ซ่อน/แสดง (ใช้โค้ดเดิมได้)
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+
+  .dropdown-item {
+    color: white;
+    padding: 0.75rem 1.25rem;
+    display: block;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+}

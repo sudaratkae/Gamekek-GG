@@ -1,0 +1,94 @@
+<app-user-toolbar></app-user-toolbar>
+
+<div class="cart-container">
+  <h1 class="page-title">
+    <button class="back-btn" (click)="goBack()">←</button>
+    Cart
+  </h1>
+
+  <div class="cart-content">
+    <!-- รายการสินค้า -->
+    <div class="items-list">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img
+          [src]="getImageUrl(item.image)"
+          alt="{{ item.title }}"
+          class="item-image"
+        />
+
+        <div class="item-details">
+          <div class="item-header">
+            <h2>{{ item.title }}</h2>
+            <div class="item-actions">
+              <span>เพิ่ม</span> |
+              <span class="remove-link" (click)="removeFromCart(item.id)"
+                >ลบ</span
+              >
+            </div>
+          </div>
+          <p *ngIf="item.description" class="item-description">
+            {{ item.description }}
+          </p>
+          <div class="item-footer">
+            <span>ราคาเต็ม : ${{ item.price | number : "1.2-2" }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+        <p>ตะกร้าของคุณว่างเปล่า</p>
+      </div>
+    </div>
+
+    <!-- สรุปการสั่งซื้อ / ส่วนลด -->
+    <div class="summary-card">
+      <div class="discount-section">
+        <label>เลือกโค้ดส่วนลด (ใช้ได้ 1 โค้ดต่อบัญชี)</label>
+        <div class="discount-buttons">
+          <button
+            *ngFor="let d of availableDiscounts"
+            (click)="selectDiscount(d)"
+            [class.selected]="discountCode === d.code"
+            [disabled]="usedDiscounts.includes(d.code)"
+          >
+            {{ d.code }} - ลด {{ d.discount_percent }}%
+            <span *ngIf="usedDiscounts.includes(d.code)"> (ใช้แล้ว)</span>
+          </button>
+        </div>
+
+        <div *ngIf="discountCode" class="selected-discount">
+          โค้ดที่เลือก: {{ discountCode }} - ลด
+          {{ discountAmount | number : "1.0-0" }}฿
+          <button (click)="clearDiscount()">ลบโค้ด</button>
+        </div>
+      </div>
+
+      <div class="price-details">
+        <div class="price-row">
+          <span>ส่วนลดจากโค้ด :</span>
+          <span>-${{ discountAmount | number : "1.2-2" }}</span>
+        </div>
+
+        <p class="list-header">รายการที่เลือก</p>
+        <div *ngFor="let item of cartItems" class="price-row item-list-row">
+          <span>{{ item.title }}</span>
+          <span>${{ item.price | number : "1.2-2" }}</span>
+        </div>
+
+        <div class="price-row total-row">
+          <span>ราคารวมทั้งหมด</span>
+          <span>${{ totalPrice | number : "1.2-2" }}</span>
+        </div>
+
+        <div class="price-row total-row">
+          <span><b>ยอดสุทธิที่ต้องชำระ</b></span>
+          <span class="final-price"
+            ><b>${{ finalPrice | number : "1.2-2" }}</b></span
+          >
+        </div>
+      </div>
+
+      <button class="checkout-btn" (click)="checkout()">ชำระเงิน</button>
+    </div>
+  </div>
+</div>

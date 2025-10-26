@@ -1,0 +1,210 @@
+/* --- General Styling --- */
+:host {
+  font-family: "Tahoma", sans-serif; // ใช้ฟอนต์ที่ดูสะอาดตา
+}
+
+/* --- Navigation Bar (แถบเมนูสีแดง) --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b71c1c; // สีแดงเข้มตามรูป
+  color: white;
+  padding: 0.5rem 5rem; // ปรับขนาด padding
+}
+
+.navbar-brand {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+// ถ้าคุณจะเพิ่มลิงก์เมนูในอนาคต
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: white;
+  }
+}
+
+/* --- Main Content Area --- */
+.container {
+  width: 100%; /* เต็มความกว้างหน้าจอ */
+  height: 100vh; /* เต็มความสูงหน้าจอ */
+  padding: 2rem;
+  background-color: #ffffff;
+  box-sizing: border-box; /* กัน padding ทำให้ล้น */
+}
+/* --- ส่วนหัวของตาราง (ที่มีปุ่ม) --- */
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.table-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* --- กลุ่มปุ่ม เพิ่ม/แก้ไข/ลบ --- */
+.action-buttons {
+  display: flex;
+  gap: 0.75rem; // ระยะห่างระหว่างปุ่ม
+}
+
+// สไตล์ปุ่มหลัก (ทำให้เป็นทรงแคปซูล)
+.btn {
+  border: none;
+  color: white;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px; // ทำให้ขอบมนสุดๆ
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px); // เอฟเฟกต์ลอยขึ้นเล็กน้อย
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// สีของแต่ละปุ่ม
+.btn-add {
+  background-color: #0fc92b;
+  color: black;
+} // สีเขียว
+.btn-edit {
+  background-color: #ffe100;
+  color: black;
+} // สีเหลือง
+.btn-delete {
+  background-color: #dd0000;
+  color: black;
+} // สีแดง
+
+/* --- ตารางแสดงรายการเกม --- */
+.card {
+  background: white;
+  margin: 2rem; /* เว้นระยะรอบ ๆ การ์ด */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.games-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.games-table th,
+.games-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+}
+
+.games-table th {
+  color: #757575;
+  font-weight: bold;
+}
+
+.game-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* --- Modal (Pop-up) Styling --- */
+.modal {
+  display: none; // ซ่อนไว้เป็นค่าเริ่มต้น
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); // พื้นหลังโปร่งแสงสีดำ
+
+  &.show {
+    display: flex; // แสดง Modal เมื่อมีคลาส .show
+    justify-content: center;
+    align-items: center;
+  }
+  .image-preview {
+    display: block;
+    width: 100%; /* เต็มความกว้าง container */
+    max-height: 400px; /* สูงสุดไม่เกิน 400px */
+    object-fit: contain; /* ปรับภาพให้ไม่ผิดสัดส่วน */
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: black;
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  .btn-primary {
+    background-color: #2196f3;
+  }
+  .btn-secondary {
+    background-color: #9e9e9e;
+  }
+}

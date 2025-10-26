@@ -1,0 +1,122 @@
+<app-user-toolbar></app-user-toolbar>
+
+<div class="profile-container" *ngIf="currentUser">
+  <h1 class="page-title">Profile</h1>
+
+  <div class="main-section">
+    <!-- Left Column -->
+    <div class="left-column">
+      <!-- Wallet Balance -->
+      <div class="card wallet-balance-card">
+        <h3>ยอดเงินคงเหลือ</h3>
+        <p class="balance">{{ walletBalance | number : "1.2-2" }}฿</p>
+      </div>
+
+      <!-- Top Up -->
+      <div class="card top-up-card">
+        <h3>เติมเงิน</h3>
+        <div class="amount-grid">
+          <button
+            *ngFor="let amt of presetAmounts"
+            class="amount-btn"
+            [class.active]="selectedAmount === amt && !customAmountVisible"
+            (click)="selectAmount(amt)"
+          >
+            {{ amt === 0 ? "กำหนดเอง" : "$" + amt }}
+          </button>
+        </div>
+
+        <div *ngIf="customAmountVisible" class="custom-amount-input">
+          <input
+            type="number"
+            class="n"
+            [(ngModel)]="selectedAmount"
+            placeholder="กรอกจำนวนเงิน"
+          />
+        </div>
+
+        <div class="confirmation-section">
+          <span class="selected-amount"
+            >{{ selectedAmount | number : "1.2-2" }}฿</span
+          >
+          <button class="confirm-btn" (click)="confirmTopUp()">ยืนยัน</button>
+        </div>
+      </div>
+
+      <!-- Transaction History -->
+      <div class="card transaction-history-card">
+        <h3>ประวัติการทำรายการ</h3>
+        <div class="history-header">
+          <span>วันที่</span>
+          <span>รายการ</span>
+          <span>จำนวน</span>
+        </div>
+        <ul class="history-list">
+          <li *ngFor="let tx of transactionHistory" class="history-row">
+            <span>{{ tx.date | date : "short" }}</span>
+            <span>{{ tx.description }}</span>
+            <span>{{ tx.amount | number : "1.2-2" }}฿</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <div class="profile-card">
+        <img
+          [src]="currentUser.profile_image || 'assets/default-avatar.png'"
+          alt="Profile"
+          class="profile-img"
+        />
+        <h3 class="h3">{{ currentUser.username }}</h3>
+        <button class="edit-btn" (click)="openEditPopup()">แก้ไขโปรไฟล์</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Popup -->
+<!-- Popup -->
+<div class="popup-overlay" [class.show]="editPopup">
+  <div class="popup-content">
+    <h3>แก้ไขโปรไฟล์</h3>
+    <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+      <div class="form-group">
+        <label>Username</label>
+        <input formControlName="username" />
+      </div>
+
+      <div class="form-group">
+        <label>รูปโปรไฟล์</label>
+        <input
+          type="file"
+          id="profileImageInput"
+          (change)="onFileChange($event)"
+          hidden
+        />
+        <label for="profileImageInput" class="image-upload-label">
+          <img
+            [src]="
+              previewImage ||
+              currentUser?.profile_image ||
+              'assets/default-avatar.png'
+            "
+            alt="Profile Preview"
+            class="profile-preview-img"
+          />
+          <span class="upload-text">เปลี่ยนรูป</span>
+        </label>
+      </div>
+
+      <div class="popup-buttons">
+        <button type="submit" [disabled]="editForm.invalid" class="save-btn">
+          บันทึก
+        </button>
+        <button type="button" class="cancel-btn" (click)="closeEditPopup()">
+          ยกเลิก
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

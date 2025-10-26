@@ -1,0 +1,69 @@
+<div class="register-wrapper">
+  <div class="register-card">
+    <!-- ฝั่งซ้าย: ฟอร์มสมัคร -->
+    <div class="register-left">
+      <h1>สมัครสมาชิก</h1>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <!-- 📌 อัปโหลดรูปโปรไฟล์ -->
+       <div class="profile-image-container">
+  <input type="file" id="profileImage" (change)="onFileChange($event)">
+  <label for="profileImage">
+    <img [src]="previewImage || 'assets/default-avatar.png'" class="profile-image">
+  </label>
+</div>
+
+        <div>
+          <label>Username</label>
+          <input formControlName="username" />
+          <div *ngIf="form.get('username')?.touched && form.get('username')?.invalid" class="error">
+            Username is required
+          </div>
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input formControlName="email" type="email" />
+          <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="error">
+            Valid email is required
+          </div>
+        </div>
+
+        <div>
+          <label>Password</label>
+          <input formControlName="password" type="password" />
+          <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+            Password must be at least 6 characters
+          </div>
+        </div>
+
+        <div>
+          <label>Confirm Password</label>
+          <input formControlName="confirmPassword" type="password" />
+          <div *ngIf="form.hasError('mismatch') && form.get('confirmPassword')?.touched" class="error">
+            Passwords do not match
+          </div>
+        </div>
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <button type="submit">สมัครสมาชิก</button>
+      </form>
+
+      <p>มีบัญชีแล้ว?
+        <button (click)="goToLogin()">เข้าสู่ระบบ</button>
+      </p>
+    </div>
+
+    <!-- ฝั่งขวา: รูป -->
+    <div class="register-right">
+      <img src="assets/logo2.png" alt="Logo" />
+    </div>
+  </div>
+
+  <!-- ป๊อปอัพสมัครสำเร็จ -->
+  <div *ngIf="successPopup" class="popup">
+    <p>สมัครสมาชิกสำเร็จ!</p>
+    <button (click)="goToLogin()">ไปหน้าเข้าสู่ระบบ</button>
+  </div>
+</div>

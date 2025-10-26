@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$rose-palette,
+      tertiary: mat.$red-palette,
+    ),
+    typography: (
+      plain-family: 'Thasadith, sans-serif',
+      brand-family: 'Fredericka the Great, cursive',
+      bold-weight: 700,
+      medium-weight: 600,
+      regular-weight: 400,
+    ),
+    density: 0,
+  ));
+}
+
+/* styles.scss */
+
+html, body {
+  height: 100%;
+  background-color: black;
+}
+
+body {
+  margin: 0;
+  font-family: 'Playfair Display', sans-serif;
+}
+

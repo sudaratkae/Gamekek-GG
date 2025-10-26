@@ -1,0 +1,42 @@
+<app-user-toolbar></app-user-toolbar>
+
+<div class="store-container">
+  <div class="search-bar">
+    <h2 class="store-title">GameStore</h2>
+
+    <div class="search-input-container">
+      <i class="fas fa-search search-icon"></i>
+
+      <input
+        type="text"
+        placeholder="ค้นหาเกม..."
+        [(ngModel)]="searchText"
+        (input)="filterGames()"
+      />
+    </div>
+
+    <select [(ngModel)]="selectedCategory" (change)="filterGames()">
+      <option value="">ทั้งหมด</option>
+      <option *ngFor="let cat of categories" [value]="cat.name">
+        {{ cat.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- การ์ดเกม -->
+  <div class="game-grid">
+    <div
+      class="game-card"
+      *ngFor="let game of filteredGames"
+      (click)="goToGameDetails(game.id)"
+    >
+      <img [src]="game.image_url" [alt]="game.title" />
+      <div class="overlay">
+        <span class="price">{{
+          game.price | currency : "USD" : "symbol" : "1.2-2"
+        }}</span>
+      </div>
+      <div class="game-title">{{ game.title }}</div>
+    </div>
+  </div>
+</div>

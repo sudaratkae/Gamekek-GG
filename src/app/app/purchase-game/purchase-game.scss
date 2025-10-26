@@ -1,0 +1,236 @@
+/* --- ตัวแปรสีเพื่อการจัดการที่ง่ายขึ้น --- */
+$background-color: #000;
+$card-bg-color: #1c1c1e;
+$summary-card-bg: #e0e0e0;
+$text-color: #fff;
+$secondary-text-color: #a0a0a0;
+$primary-red: #ff3b30;
+$primary-yellow: #ffdd40;
+
+/* --- Layout หลักของหน้า --- */
+.cart-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  color: $text-color;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: $text-color;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.cart-content {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr; // สัดส่วนคอลัมน์ ซ้าย : ขวา
+  gap: 2.5rem;
+}
+
+/* --- คอลัมน์ซ้าย: รายการสินค้า --- */
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1.5rem;
+  background-color: $card-bg-color;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.item-image {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  h2 {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+}
+
+.item-actions {
+  color: $secondary-text-color;
+  font-size: 0.9rem;
+  .remove-link {
+    cursor: pointer;
+    &:hover {
+      color: $primary-red;
+    }
+  }
+}
+
+.item-description {
+  color: $secondary-text-color;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+}
+
+.item-footer {
+  margin-top: auto; // ดันให้ลงไปอยู่ล่างสุด
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  span {
+    color: $secondary-text-color;
+  }
+}
+
+.remove-btn {
+  background-color: $primary-red;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.empty-cart-message {
+  text-align: center;
+  padding: 4rem;
+  color: $secondary-text-color;
+  font-size: 1.2rem;
+}
+
+/* --- คอลัมน์ขวา: ส่วนสรุป --- */
+.summary-card {
+  background-color: $summary-card-bg;
+  color: #000;
+  border-radius: 16px;
+  padding: 1.5rem;
+  height: fit-content; // ทำให้ความสูงพอดีกับเนื้อหา
+}
+
+.discount-section {
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .discount-input-group {
+    display: flex;
+    input {
+      flex-grow: 1;
+      border: 1px solid #c7c7c7;
+      border-radius: 8px 0 0 8px;
+      padding: 0.75rem;
+      font-size: 1rem;
+      &:focus {
+        outline: none;
+      }
+    }
+    .apply-btn {
+      background-color: #c7c7c7;
+      border: 1px solid #c7c7c7;
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      padding: 0 1.25rem;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+  }
+}
+
+.price-details {
+  margin: 2rem 0;
+  border-top: 1px solid #c7c7c7;
+  padding-top: 1.5rem;
+  .list-header {
+    font-weight: bold;
+    margin-top: 1.5rem;
+  }
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  &.item-list-row {
+    font-size: 0.9rem;
+    color: #555;
+  }
+}
+
+.total-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #c7c7c7;
+  padding-top: 1.5rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  .final-price {
+    font-size: 2.5rem;
+    color: $primary-red;
+  }
+}
+
+.checkout-btn {
+  background-color: $primary-yellow;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+.discount-buttons button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: 1px solid #666;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.discount-buttons button.selected {
+  background-color: #4caf50;
+  color: white;
+}
+.selected-discount {
+  margin-top: 10px;
+}
+.selected-discount button {
+  margin-left: 10px;
+  padding: 2px 6px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

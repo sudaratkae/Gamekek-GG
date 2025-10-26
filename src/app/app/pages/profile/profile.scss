@@ -1,0 +1,183 @@
+/* Layout */
+.main-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+
+  /* --- ส่วนที่แก้ไข --- */
+  max-width: 1400px; /* 1. กำหนดความกว้างสูงสุด (ปรับค่าได้ตามต้องการ) */
+  margin: 2rem auto; /* 2. บน-ล่าง 2rem, ซ้าย-ขวา auto (จัดกลาง) */
+}
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.h3 {
+  color: #fff;
+  font-size: 30px;
+}
+.edit-btn {
+  padding: 1rem;
+  border-radius: 12px;
+}
+/* Card */
+.card {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.wallet-balance-card .balance {
+  font-size: 3rem;
+  color: #2ecc71;
+}
+
+/* Top Up */
+.top-up-card .amount-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+.n,
+.selected-amount {
+  padding: 0.5rem;
+  font-size: 20px;
+}
+
+.amount-btn {
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+.amount-btn.active,
+.amount-btn:hover {
+  background: #c7c7c7;
+}
+
+.confirm-btn {
+  background: #2ecc71;
+  color: #000;
+  border-radius: 70px;
+  padding: 0.5rem 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Transaction History */
+.transaction-history-card .history-row,
+.history-header {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem 0;
+}
+
+/* Profile */
+.right-column .profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+/* Popup */
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Popup Content */
+.popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 360px; /* กำหนดขนาดพอดี */
+  max-width: 90%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-30px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.popup-overlay.show .popup-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* รูปโปรไฟล์ใน popup */
+.profile-preview-img {
+  width: 100px; /* พอดีกับ popup */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+/* ปุ่มแก้ไขรูป */
+.image-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.upload-text {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* Buttons */
+.popup-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.save-btn {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+}

@@ -1,0 +1,37 @@
+<app-user-toolbar></app-user-toolbar>
+
+<div class="game-detail-container" *ngIf="gameData">
+  <h1 class="page-title">
+    <span class="back-arrow" (click)="goBack()">←</span>
+    Game Detail
+  </h1>
+
+  <div class="game-detail-content">
+    <div class="left">
+      <h2>{{ gameData?.title }}</h2>
+      <img [src]="gameData?.image_url" alt="{{ gameData?.title }}" />
+
+      <div class="meta">
+        <p>แนว: {{ gameData?.category_name }}</p>
+        <p>วันวางจำหน่าย: {{ gameData?.release_date | date : "longDate" }}</p>
+        <p>อันดับ: {{ gameData?.rank }}</p>
+      </div>
+    </div>
+
+    <div class="right">
+      <h1 class="title">{{ gameData?.title }}</h1>
+      <p class="description">{{ gameData?.description }}</p>
+
+      <div class="bottom">
+        <span class="price">เป็นเจ้าของแล้ว</span>
+
+        <button class="buy-btn" routerLink="/game">ดูหน้าร้านค้า</button>
+
+        <!-- ข้อความบอกว่าเกมซื้อแล้ว -->
+        <span *ngIf="isPurchased" class="purchased-label"
+          >เกมนี้คุณซื้อแล้ว</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

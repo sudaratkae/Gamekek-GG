@@ -1,0 +1,92 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container">
+  <div class="card create-section">
+    <h3>{{ editingDiscount ? "แก้ไขโค้ดส่วนลด" : "สร้างโค้ดส่วนลดใหม่" }}</h3>
+
+    <div class="form-group">
+      <input [(ngModel)]="discountForm.code" placeholder="Code" />
+      <small class="form-text">รหัสส่วนลด เช่น WELCOME10</small>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="number"
+        [(ngModel)]="discountForm.discount_percent"
+        placeholder="Percent (%)"
+      />
+      <small class="form-text">เปอร์เซ็นต์ส่วนลด เช่น 10 = ลด 10%</small>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="number"
+        [(ngModel)]="discountForm.max_uses"
+        placeholder="Max Uses"
+      />
+      <small class="form-text">จำนวนครั้งสูงสุดที่ใช้ได้ เช่น 50 ครั้ง</small>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="date"
+        [(ngModel)]="discountForm.expires_at"
+        placeholder="Expires At"
+      />
+      <small class="form-text">วันหมดอายุ เช่น 2025-12-31</small>
+    </div>
+
+    <div class="form-actions">
+      <button *ngIf="editingDiscount" class="btn btn-edit" (click)="saveEdit()">
+        บันทึก
+      </button>
+      <button
+        *ngIf="editingDiscount"
+        class="btn btn-secondary"
+        (click)="cancelEdit()"
+      >
+        ยกเลิก
+      </button>
+      <button
+        *ngIf="!editingDiscount"
+        class="btn btn-add"
+        (click)="createDiscount()"
+      >
+        สร้างโค้ด
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="card list-section">
+    <h3>รายการโค้ดส่วนลด</h3>
+    <table class="games-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Discount %</th>
+          <th>Max Uses</th>
+          <th>Used Count</th>
+          <th>Expires At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of discounts">
+          <td>{{ d.code }}</td>
+          <td>{{ d.discount_percent }}%</td>
+          <td>{{ d.max_uses }}</td>
+          <td>{{ d.used_count }}</td>
+          <td>{{ d.expires_at || "-" }}</td>
+          <td>
+            <button class="btn btn-edit" (click)="startEdit(d)">แก้ไข</button>
+            <button class="btn btn-delete" (click)="deleteDiscount(d.id)">
+              ลบ
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

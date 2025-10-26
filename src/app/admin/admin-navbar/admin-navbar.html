@@ -1,0 +1,18 @@
+<nav class="admin-navbar">
+  <div class="brand">GameKek Admin</div>
+  <nav class="admin-navbar" *ngIf="isAdminLoggedIn()">
+    <a
+      routerLink="/admin/dashboard"
+      [class.active]="currentRoute === '/admin/dashboard'"
+      >เกม</a
+    >
+    <a routerLink="/discounts" [class.active]="currentRoute === '/discounts'"
+      >โค้ดส่วนลด</a
+    >
+    <a routerLink="/ranking" [class.active]="currentRoute === '/ranking'"
+      >จัดอันดับ</a
+    >
+    <a routerLink="/transactions" routerLinkActive="active">ประวัติธุรกรรม</a>
+    <a (click)="logout()">ออกจากระบบ</a>
+  </nav>
+</nav>

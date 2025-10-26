@@ -1,0 +1,132 @@
+.store-container {
+  width: 100vw; // ✅ ให้กว้างเต็มจอ
+  margin: 20; // ✅ ไม่มี margin ซ้ายขวา
+  padding: 2rem 0; // ✅ padding เฉพาะด้านบน–ล่าง
+
+  /* --- โค้ดที่แก้ไขเพื่อให้เหมือนรูปภาพ --- */
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; // เพิ่มช่องว่างระหว่างองค์ประกอบ
+    margin: 20px 20rem 20px; // กำหนด margin ซ้าย-ขวา และด้านล่างในบรรทัดเดียว
+
+    .store-title {
+      font-size: 2.25rem; // เพิ่มขนาดให้เด่นขึ้น
+      font-weight: bold;
+      color: #ffffff; // เปลี่ยนเป็นสีขาว
+      white-space: nowrap;
+    }
+
+    // ใช้ container ครอบ input เพื่อจัดการไอคอนได้ง่าย
+    .search-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex: 1; // ให้ช่องค้นหายาวที่สุด
+
+      // สไตล์ของไอคอนแว่นขยาย
+      .search-icon {
+        position: absolute;
+        left: 1rem; // ระยะห่างจากขอบซ้าย
+        font-size: 1.25rem; // ขนาดไอคอน
+        color: #555; // สีไอคอน
+        pointer-events: none; // ทำให้คลิกทะลุไอคอนไปที่ input ได้
+      }
+    }
+
+    input,
+    select {
+      padding: 0.75rem 1.5rem; // ปรับขนาด padding ภายใน
+      font-size: 1rem;
+      border-radius: 50px; // *** ทำให้ขอบมนเป็นทรงแคปซูล
+      border: none; // *** เอาเส้นขอบออก
+      background-color: #e0e0e0; // *** เปลี่ยนสีพื้นหลังเป็นเทาอ่อน
+      color: #333; // สีของตัวอักษรที่พิมพ์
+    }
+
+    // สไตล์สำหรับช่องค้นหาโดยเฉพาะ
+    input {
+      flex: 1; // ทำให้ input ขยายเต็มพื้นที่ของ container
+      padding-left: 3rem; // *** เพิ่ม padding ด้านซ้ายเพื่อไม่ให้ทับไอคอน
+
+      // สไตล์ของ placeholder (ข้อความ "ค้นหาเกม")
+      &::placeholder {
+        color: #555;
+      }
+    }
+
+    // สไตล์สำหรับ Dropdown
+    select {
+      -webkit-appearance: none; // เอาลูกศร dropdown เริ่มต้นออก (สำหรับ Safari, Chrome)
+      appearance: none; // เอาลูกศร dropdown เริ่มต้นออก (มาตรฐาน)
+    }
+  }
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding: 0 10rem; // ✅ เว้นขอบการ์ดซ้ายขวาเล็กน้อย
+
+    .game-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.123);
+        color: #fff;
+        text-align: center;
+        padding: 0.3rem 0;
+        font-weight: bold;
+      }
+
+      .game-title {
+        padding: 0.5rem;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .game-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .game-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .game-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .game-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,128 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a;
+  font-family: "Playfair Display ", sans-serif;
+
+  /* ✅ พื้นหลังเป็นรูป */
+  background-image: url('/assets/bg.png'); /* รูปอยู่ใน src/assets */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* ✅ ปิดปีกกาแล้วค่อยเริ่ม login-card */
+.login-card {
+  display: flex;
+  width: 800px;
+  min-height: 450px;
+  border-radius: 12px;
+    width: 1000px; /* ✅ เพิ่มความกว้างจากเดิม */
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+
+  /* ฝั่งซ้าย: ฟอร์ม */
+  .login-left {
+    flex: 1;
+    padding: 2rem;
+    background-color: #B22222;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+      font-size: 2rem;
+    }
+
+    form {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 2px solid #ff4d4d;
+        border-radius: 6px;
+        background-color: #B22222;
+        color: #ffffff;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: #ff1a1a;
+          box-shadow: 0 0 5px #ff1a1a;
+        }
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 0.7rem;
+        margin-top: 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #7e6868;
+        color: #06be10;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #000000;
+        }
+      }
+
+      .error {
+        color: rgb(199, 199, 199);
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    p {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1rem;
+
+      button {
+        color: #4dff56;
+        text-decoration: underline;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &:hover {
+          color: #1aff53;
+        }
+      }
+    }
+  }
+
+  /* ฝั่งขวา: รูปเต็มการ์ด */
+  .login-right {
+    flex: 1;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}

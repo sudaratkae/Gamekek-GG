@@ -1,0 +1,38 @@
+<div class="admin-login-wrapper">
+  <div class="admin-login-card">
+
+    <!-- ฝั่งซ้าย: ฟอร์มล็อกอิน -->
+    <div class="admin-login-left">
+      <h2>Admin Login</h2>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div>
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+  <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="error">
+    กรุณากรอก Email ให้ถูกต้อง
+  </div>
+</div>
+
+
+        <div>
+          <label>Password</label>
+          <input formControlName="password" type="password" />
+          <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="error">
+            กรุณากรอกรหัสผ่าน
+          </div>
+        </div>
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <button type="submit">เข้าสู่ระบบ</button>
+      </form>
+    </div>
+
+    <!-- ฝั่งขวา: รูป / โลโก้ -->
+    <div class="admin-login-right">
+      <img src="assets/logo3.png" alt="Admin Logo" />
+    </div>
+
+  </div>
+</div>

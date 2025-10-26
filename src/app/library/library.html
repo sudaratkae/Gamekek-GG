@@ -1,0 +1,42 @@
+<app-user-toolbar></app-user-toolbar>
+
+<div class="store-container">
+  <div class="search-bar">
+    <h2 class="store-title">คลังเกมของคุณ</h2>
+
+    <div class="search-input-container">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        type="text"
+        placeholder="ค้นหาเกม..."
+        [(ngModel)]="searchText"
+        (input)="filterGames()"
+      />
+    </div>
+  </div>
+
+  <!-- การ์ดเกม -->
+  <div class="game-grid">
+    <div
+      class="game-card"
+      *ngFor="let game of filteredGames"
+      (click)="goToGameDetails(game.id)"
+    >
+      <img [src]="getImageUrl(game.image)" [alt]="game.title" />
+      <div class="overlay">
+        <span class="price">{{
+          game.price | currency : "USD" : "symbol" : "1.2-2"
+        }}</span>
+      </div>
+      <div class="game-title">{{ game.title }}</div>
+
+      <!-- แสดงป้ายซื้อแล้วเฉพาะเกมที่ owned -->
+      <span *ngIf="game.owned" class="purchased-label">ซื้อแล้ว</span>
+    </div>
+  </div>
+
+  <!-- ข้อความถ้าไม่มีเกม -->
+  <div *ngIf="filteredGames.length === 0" class="empty-library">
+    <p>คุณยังไม่ได้ซื้อเกมใด</p>
+  </div>
+</div>

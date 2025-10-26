@@ -1,0 +1,107 @@
+// --- เริ่มโค้ดสำหรับหน้า Game Detail ---
+
+// ตัวแปรสีเพื่อการจัดการที่ง่ายขึ้น
+$primary-text-color: #ffffff;
+$secondary-text-color: #a0a0a0;
+$price-color: #e53935; // สีแดงสด
+$button-bg-color: #ffdd40; // สีเหลืองสด
+$button-text-color: #000000;
+$container-bg-color: #121212; // สีพื้นหลังเข้ม
+
+// Container หลักของทั้งหน้า
+.game-detail-container {
+  max-width: 1200px;
+  margin: 2rem auto; // จัดให้อยู่กลางหน้าจอและมีระยะห่างบนล่าง
+  padding: 0 2rem; // ระยะห่างจากขอบซ้ายขวา
+  color: $primary-text-color;
+  grid-template-columns: 2fr 3fr;
+  gap: 3rem;
+
+  // --- ส่วนหัวข้อ "Game Detail" ---
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  // --- Container ของเนื้อหาหลัก (2 คอลัมน์) ---
+  .game-detail-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr; // แบ่งสัดส่วน ซ้าย 1 ส่วน : ขวา 2 ส่วน
+    gap: 3rem; // ช่องว่างระหว่างคอลัมน์
+  }
+}
+
+// --- คอลัมน์ซ้าย (รูปภาพและข้อมูล) ---
+.left img {
+  width: 100%;
+  aspect-ratio: 16 / 9; // กำหนดอัตราส่วน 16:9
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+
+  .meta {
+    p {
+      font-size: 1rem;
+      color: $secondary-text-color;
+      margin: 0.5rem 0; // ระยะห่างระหว่างบรรทัด
+    }
+  }
+}
+
+// --- คอลัมน์ขวา (ชื่อ, รายละเอียด, ราคา, ปุ่ม) ---
+.right {
+  display: flex;
+  flex-direction: column; // จัดเรียงเนื้อหาจากบนลงล่าง
+
+  .title {
+    font-size: 4rem; // ขนาดตัวอักษรใหญ่พิเศษ
+    font-weight: bold;
+    text-transform: lowercase; // ทำให้เป็นตัวพิมพ์เล็กทั้งหมด
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    background-color: $container-bg-color;
+    border: 1px solid #333; // เส้นขอบสีเทาเข้ม
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $secondary-text-color;
+    flex-grow: 1; // *** Trick: ทำให้ description ขยายเต็มพื้นที่ว่าง ดันส่วน bottom ลงไปอยู่ล่างสุด
+  }
+
+  // --- ส่วนล่างสุด (ราคาและปุ่ม) ---
+  .bottom {
+    display: flex;
+    justify-content: flex-end; // จัดให้ชิดขวา
+    align-items: center;
+    margin-top: 2rem; // ระยะห่างจาก description
+    gap: 2rem; // ช่องว่างระหว่างราคาและปุ่ม
+
+    .price {
+      font-size: 3rem;
+      font-weight: bold;
+      color: $price-color;
+    }
+
+    .buy-btn {
+      background-color: $button-bg-color;
+      color: $button-text-color;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05); // เอฟเฟกต์ตอนเอาเมาส์ไปชี้
+      }
+    }
+  }
+}

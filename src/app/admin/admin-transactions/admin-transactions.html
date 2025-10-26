@@ -1,0 +1,53 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container">
+  <h1>ประวัติธุรกรรมของผู้ใช้</h1>
+
+  <div class="filter-section">
+    <label>เลือกผู้ใช้:</label>
+    <select (change)="onUserChange($any($event.target).value)">
+      <option value="">-- Select User --</option>
+      <option *ngFor="let user of users" [value]="user.id">
+        {{ user.username }}
+      </option>
+    </select>
+  </div>
+
+  <table *ngIf="transactions.length > 0" class="transactions-table">
+    <thead>
+      <tr>
+        <th>ชื่อผู้ใช้</th>
+        <th>รายละเอียด</th>
+        <th>จำนวนเงิน</th>
+        <th>วันที่ทำรายการ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tx of transactions">
+        <!-- ชื่อผู้ใช้ -->
+        <td>{{ tx.user?.username || "ไม่ระบุ" }}</td>
+
+        <!-- รายละเอียดธุรกรรม: เติมเงิน / ซื้อเกม -->
+        <td>
+          {{
+            tx.type === "topup"
+              ? "เติมเงิน"
+              : tx.type === "purchase"
+              ? "ซื้อเกม"
+              : "ไม่ระบุ"
+          }}
+        </td>
+
+        <!-- จำนวนเงิน -->
+        <td>{{ tx.amount | number : "1.2-2" }} ฿</td>
+
+        <!-- วันที่ทำรายการ -->
+        <td>{{ tx.date | date : "dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="transactions.length === 0 && selectedUserId">
+    <p>ไม่พบธุรกรรมของผู้ใช้คนนี้</p>
+  </div>
+</div>

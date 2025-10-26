@@ -1,0 +1,108 @@
+/* --- Global Styles for the page --- */
+.container {
+  padding: 0 2rem;
+  font-family: sans-serif;
+}
+.container {
+  width: 100%; /* เต็มความกว้างหน้าจอ */
+  height: 100vh; /* เต็มความสูงหน้าจอ */
+  padding: 2rem;
+  background-color: #ffffff;
+  box-sizing: border-box; /* กัน padding ทำให้ล้น */
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* --- Filter and Search Section --- */
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.user-select-btn {
+  background-color: #ffd60a; // สีเหลือง
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.75rem 2.5rem 0.75rem 1rem; // เพิ่มที่ว่างด้านขวาให้ไอคอน
+    font-size: 1rem;
+    width: 300px;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 0.75rem;
+    font-size: 1.25rem;
+    color: #555;
+    cursor: pointer;
+  }
+}
+
+/* --- Selected User Info --- */
+.selected-user-info {
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+
+  p {
+    margin: 0;
+    color: red; // สีแดงตามแบบ
+    font-weight: bold;
+
+    strong {
+      color: #000; // สีดำสำหรับชื่อ
+    }
+  }
+}
+
+/* --- Transactions Table --- */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse; // ทำให้เส้นตารางรวมเป็นเส้นเดียว
+
+  thead th {
+    text-align: left;
+    padding: 1rem 0.5rem;
+    border-bottom: 2px solid #000; // เส้นหนาใต้หัวตาราง
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  tbody td {
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid #e0e0e0; // เส้นบางๆ คั่นแต่ละแถว
+  }
+
+  // ทำให้แถวสุดท้ายไม่มีเส้นขีดล่าง
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+/* --- No Data Message --- */
+.no-data-message {
+  text-align: center;
+  margin-top: 3rem;
+  color: #888;
+  font-size: 1.1rem;
+}

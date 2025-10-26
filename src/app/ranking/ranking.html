@@ -1,0 +1,34 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="container">
+  <div class="card ranking-section">
+    <h3>🏆 จัดอันดับเกมขายดี</h3>
+
+    <div *ngIf="loading" class="loading-text">กำลังโหลดข้อมูล...</div>
+    <div *ngIf="errorMessage" class="error-text">{{ errorMessage }}</div>
+
+    <table class="games-table" *ngIf="!loading && rankings.length > 0">
+      <thead>
+        <tr>
+          <th>อันดับ</th>
+          <th>ชื่อเกม</th>
+          <th>หมวดหมู่</th>
+          <th>ยอดขาย</th>
+          <th>รายได้รวม (฿)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of rankings; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ game.title }}</td>
+          <td>{{ game.category_name }}</td>
+          <td>{{ game.total_sales | number }}</td>
+          <td>{{ game.total_revenue | number }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!loading && rankings.length === 0" class="no-data">
+      ไม่มีข้อมูลจัดอันดับ
+    </div>
+  </div>
+</div>

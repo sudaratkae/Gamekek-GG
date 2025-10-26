@@ -1,0 +1,30 @@
+.admin-navbar {
+  background-color: #b71c1c;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem; // ขนาดตัวอักษรใหญ่ขึ้น
+  padding: 3.5rem 2rem;
+  justify-content: space-between;
+
+  .brand {
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+  .admin-navbar {
+    display: flex;
+    gap: 10.5rem; // ระยะห่างระหว่างปุ่ม
+    padding: 1rem 2rem;
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      &:hover {
+        text-decoration: underline;
+      }
+      &.active {
+        border-bottom: 2px solid white; // ไฮไลต์ปุ่ม active
+      }
+    }
+  }
+}
