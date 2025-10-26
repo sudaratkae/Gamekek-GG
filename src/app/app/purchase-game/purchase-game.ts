@@ -205,6 +205,6 @@ export class PurchaseGameComponent implements OnInit {
   }
   getImageUrl(image: string): string {
     if (!image) return 'assets/no-image.png';
-    return `http://localhost:5000/uploads/games/${image}`;
+    return `https://gamekek.onrender.com/uploads/games/${image}`;
   }
 }

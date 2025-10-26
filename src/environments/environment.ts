@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api', // ใส่ URL Backend ของคุณ
+  apiUrl: 'https://gamekek.onrender.com/api', // ใส่ URL Backend ของคุณ
 };
